@@ -171,6 +171,26 @@ bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
 	return true;
 }
 
+void matrix_mul_num(SML_MATRIX *mat1, int num, SML_MATRIX *mat2) {
+	for (int i = 0; i < mat1->lines; i++)
+		for (int j = 0; j < mat1->columns; j++)
+			matrix_set(mat2, i, j, matrix_get(mat1, i, j) * num);
+}
+
+bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
+	matrix_init(mat3, mat1->lines, mat2->columns);
+
+	if (mat1->columns != mat2->lines)
+		return false;
+
+	for (int i = 0; i < mat3->lines; i++)
+		for (int j = 0; j < mat3->columns; j++)
+			for (int k = 0; k < mat1->columns; k++)
+				matrix_set(mat3, i, j, matrix_get(mat3, i, j) + matrix_get(mat1, i, k) * matrix_get(mat2, k, j));
+
+	return true;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2, mat3;
 	matrix_init(&mat1, 4, 4);
