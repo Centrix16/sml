@@ -51,8 +51,6 @@ int matrix_get(SML_MATRIX *mat, int line, int column) {
 	return mat->table[matrix_get_pos(mat, line, column)];
 }
 
-
-
 void matrix_set(SML_MATRIX *mat, int line, int column, int value) {
 	mat->table[matrix_get_pos(mat, line, column)] = value;
 }
@@ -191,26 +189,40 @@ bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
 	return true;
 }
 
+bool matrix_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column) {
+	if (line <= 1 || column <= 1 || !matrix_is_square(mat))
+			return false;
+
+	matrix_init(mat_res, mat->lines - 1, mat->columns -1);
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			if (i < line && j < column)
+				matrix_set(mat_res, i, j, matrix_get(mat, i, j));
+			else if (i < line && j > column)
+				matrix_set(mat_res, i, j, matrix_get(mat, i, j - 1));
+			else if (i > line && j < column)
+				matrix_set(mat_res, i, j, matrix_get(mat, i - 1, j));
+			else if (i > line && j > column)
+				matrix_set(mat_res, i, j, matrix_get(mat, i - 1, j - 1));
+
+	return true;
+}
+
 int main() {
-	SML_MATRIX mat1, mat2, mat3;
-	matrix_init(&mat1, 2, 3);
-	matrix_init(&mat2, 3, 3);
+	SML_MATRIX mat1, mat2;
+	matrix_init(&mat1, 3, 3);
 	matrix_fill(&mat1, (int []) {
 		1, 2, 3,
-		5, 1, 0
-	});
-	matrix_fill(&mat2, (int []) {
-		3, 2, -1,
-		4, 0, 0,
-		2, 5, 1
+		4, 5, 6,
+		7, 8, 9
 	});
 	matrix_print(&mat1);
+
+	matrix_minor(&mat1, &mat2, 1, 1);
 	matrix_print(&mat2);
 
-	matrix_mul(&mat1, &mat2, &mat3);
-	matrix_print(&mat3);
 
 	matrix_free(&mat1);
 	matrix_free(&mat2);
-	matrix_free(&mat3);
 }
