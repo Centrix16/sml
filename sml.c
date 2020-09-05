@@ -193,41 +193,21 @@ bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
 
 int main() {
 	SML_MATRIX mat1, mat2, mat3;
-	matrix_init(&mat1, 4, 4);
-	matrix_init(&mat2, 4, 4);
-	matrix_init(&mat3, 4, 4);
-	matrix_fill(&mat1, (int []){
-		1, 2, 3, 4,
-		8, 7, 6, 5,
-		9, 0, 9, 8,
-		4, 5, 6, 7
+	matrix_init(&mat1, 2, 3);
+	matrix_init(&mat2, 3, 3);
+	matrix_fill(&mat1, (int []) {
+		1, 2, 3,
+		5, 1, 0
 	});
-	matrix_fill(&mat2, (int []){
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0
+	matrix_fill(&mat2, (int []) {
+		3, 2, -1,
+		4, 0, 0,
+		2, 5, 1
 	});
-	matrix_fill(&mat3, (int []){
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0
-	});
-
 	matrix_print(&mat1);
-	printf("order: %d\n", matrix_get_order(&mat1));
-	printf("is_square: %d\n", matrix_is_square(&mat1));
-	printf("is_diagonal: %d\n", matrix_is_diagonal(&mat1));
-	printf("is_identity: %d\n", matrix_is_identity(&mat1));
-	printf("is_zero: %d\n", matrix_is_zero(&mat1));
-	printf("is_column: %d\n", matrix_is_column(&mat1));
-	printf("is_line: %d\n", matrix_is_line(&mat1));
-
-	matrix_transp(&mat1, &mat2);
 	matrix_print(&mat2);
 
-	matrix_diff(&mat1, &mat2, &mat3);
+	matrix_mul(&mat1, &mat2, &mat3);
 	matrix_print(&mat3);
 
 	matrix_free(&mat1);
