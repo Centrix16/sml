@@ -27,5 +27,7 @@ bool matrix_is_line(SML_MATRIX *mat);
 void matrix_transp(SML_MATRIX *mat1, SML_MATRIX *mat2);
 bool matrix_add(SML_MATRIX *mat1, SML_MATRIX * mat2, SML_MATRIX *mat3);
 bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3);
+void matrix_mul_num(SML_MATRIX *mat1, int num, SML_MATRIX *mat2);
+bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3);
 
 #endif
