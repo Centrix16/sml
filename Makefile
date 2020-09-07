@@ -6,7 +6,7 @@ libs = -lm
 out = sml
 
 all:
-	$(ct) $(dbg_flags) $(out) $(src)
+	$(ct) $(libs) $(dbg_flags) $(out) $(src)
 rm:
 	rm -rf $(out)
 release:
