@@ -209,6 +209,25 @@ bool matrix_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column) {
 	return true;
 }
 
+int matrix_det(SML_MATRIX *mat) {
+	int res = 0;
+	SML_MATRIX tmp;
+
+	if (matrix_get_order(mat) == -1)
+		return 0;
+	else if (matrix_get_order(mat) == 1)
+		return matrix_get(mat, 0, 0);
+	else
+		for (int j = 0, i = 0; j < mat->columns; j++) {
+			matrix_minor(mat, &tmp, i, j);
+			res += matrix_get(mat, i, j) * pow(-1, i + j) * matrix_det(&tmp);
+		}
+
+	matrix_free(&tmp);
+
+	return res;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 3, 3);
@@ -219,9 +238,7 @@ int main() {
 	});
 	matrix_print(&mat1);
 
-	matrix_minor(&mat1, &mat2, 1, 1);
-	matrix_print(&mat2);
+	printf("test: det() = %d\n", matrix_det(&mat1));
 
 	matrix_free(&mat1);
-	matrix_free(&mat2);
 }
