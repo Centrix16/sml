@@ -17,6 +17,7 @@ int matrix_get(SML_MATRIX *mat, int line, int column);
 void matrix_set(SML_MATRIX *mat, int line, int column, int value);
 void matrix_print(SML_MATRIX *mat);
 void matrix_fill(SML_MATRIX *mat, int *array);
+void matrix_fill_rand(SML_MATRIX *mat, int min, int max);
 bool matrix_is_equal(SML_MATRIX *mat1, SML_MATRIX *mat2);
 bool matrix_is_square(SML_MATRIX *mat);
 bool matrix_is_diagonal(SML_MATRIX *mat);
