@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "sml.h"
 
@@ -67,6 +68,14 @@ void matrix_fill(SML_MATRIX *mat, int *array) {
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++) 
 			matrix_set(mat, i, j, array[matrix_get_pos(mat, i, j)]);
+}
+
+void matrix_fill_rand(SML_MATRIX *mat, int min, int max) {
+	srand(time(NULL));
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			matrix_set(mat, i, j, rand() % (max - min + 1) + min);
 }
 
 bool matrix_is_equal(SML_MATRIX *mat1, SML_MATRIX *mat2) {
@@ -241,6 +250,10 @@ int main() {
 	matrix_print(&mat1);
 
 	printf("test: det() = %d\n", matrix_det(&mat1));
+
+	matrix_fill_rand(&mat1, 0, 1);
+
+	matrix_print(&mat1);
 
 	matrix_free(&mat1);
 }
