@@ -7,9 +7,8 @@ typedef struct {
 	int columns;
 } SML_MATRIX;
 
-void matrix_init(SML_MATRIX *mat, int lines, int columns);
+SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns);
 void matrix_free(SML_MATRIX *mat);
-void matrix_resize(SML_MATRIX *mat, int lines, int columns);
 int matrix_get_pos(SML_MATRIX *mat, int line, int column);
 int matrix_get_size(SML_MATRIX *mat);
 int matrix_get_order(SML_MATRIX *mat);
