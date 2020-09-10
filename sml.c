@@ -230,28 +230,27 @@ int matrix_det(SML_MATRIX *mat) {
 		for (int j = 0, i = 0; j < mat->columns; j++) {
 			matrix_minor(mat, &tmp, i, j);
 			res += matrix_get(mat, i, j) * pow(-1, i + j) * matrix_det(&tmp);
+			matrix_free(&tmp);
 		}
-
-	matrix_free(&tmp);
 
 	return res;
 }
 
 int main() {
 	SML_MATRIX mat1;
-	matrix_init(&mat1, 5, 5);
-	matrix_fill(&mat1, (int []) {
+	matrix_init(&mat1, 2, 2);
+	/* matrix_fill(&mat1, (int []) {
 		1, 2, 3, 0, -1,
 		4, 5, 6, 45, -3,
 		7, 8, 10, 4, 1,
 		0, 0, 4, 8, 5,
 		11, 12, 13, 14, 15
-	});
+	}); */
 	matrix_print(&mat1);
 
-	printf("test: det() = %d\n", matrix_det(&mat1));
+	matrix_fill_rand(&mat1, 1, 2);
 
-	matrix_fill_rand(&mat1, 0, 1);
+	printf("test: det() = %d\n", matrix_det(&mat1));
 
 	matrix_print(&mat1);
 
