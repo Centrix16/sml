@@ -12,11 +12,7 @@ SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns) {
 
 	mat->lines = lines;
 	mat->columns = columns;
-
-	if (mat->table != NULL)
-		mat->table = malloc(matrix_get_size(mat) * sizeof(int));
-	else
-		mat->table = realloc(mat->table, matrix_get_size(mat));
+	mat->table = malloc(matrix_get_size(mat) * sizeof(int));
 
 	if (mat->table == NULL)
 		return NULL;
@@ -239,7 +235,7 @@ int matrix_det(SML_MATRIX *mat) {
 
 int main() {
 	SML_MATRIX mat1;
-	matrix_init(&mat1, 10, 10);
+	matrix_init(&mat1, 5, 5);
 	/* matrix_fill(&mat1, (int []) {
 		1, 2, 3, 0, -1,
 		4, 5, 6, 45, -3,
