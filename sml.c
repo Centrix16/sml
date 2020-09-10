@@ -6,31 +6,32 @@
 
 #include "sml.h"
 
-void matrix_init(SML_MATRIX *mat, int lines, int columns) {
+SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns) {
+	if (lines <= 0 || columns <= 0)
+		return NULL;
+
 	mat->lines = lines;
 	mat->columns = columns;
-	mat->table = malloc(matrix_get_size(mat) * sizeof(int));
+
+	if (mat->table != NULL)
+		mat->table = malloc(matrix_get_size(mat) * sizeof(int));
+	else
+		mat->table = realloc(mat->table, matrix_get_size(mat));
+
+	if (mat->table == NULL)
+		return NULL;
 
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
 			matrix_set(mat, i, j, 0);
+
+	return mat;
 }
 
 void matrix_free(SML_MATRIX *mat) {
 	mat->lines = 0;
 	mat->columns = 0;
 	free(mat->table);
-}
-
-/* ? */
-void matrix_resize(SML_MATRIX *mat, int lines, int columns) {
-	mat->lines = lines;
-	mat->columns = columns;
-	mat->table = realloc(mat->table, matrix_get_size(mat));
-
-	for (int i = 0; i < mat->lines; i++)
-		for (int j = 0; j < mat->columns; j++)
-			matrix_set(mat, i, j, 0);
 }
 
 int matrix_get_pos(SML_MATRIX *mat, int line, int column) {
@@ -238,7 +239,7 @@ int matrix_det(SML_MATRIX *mat) {
 
 int main() {
 	SML_MATRIX mat1;
-	matrix_init(&mat1, 2, 2);
+	matrix_init(&mat1, 10, 10);
 	/* matrix_fill(&mat1, (int []) {
 		1, 2, 3, 0, -1,
 		4, 5, 6, 45, -3,
@@ -246,9 +247,8 @@ int main() {
 		0, 0, 4, 8, 5,
 		11, 12, 13, 14, 15
 	}); */
-	matrix_print(&mat1);
 
-	matrix_fill_rand(&mat1, 1, 2);
+	matrix_fill_rand(&mat1, 1, 5);
 
 	printf("test: det() = %d\n", matrix_det(&mat1));
 
