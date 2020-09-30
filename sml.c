@@ -45,23 +45,23 @@ int matrix_get_order(SML_MATRIX *mat) {
 		return -1;
 }
 
-int matrix_get(SML_MATRIX *mat, int line, int column) {
+double matrix_get(SML_MATRIX *mat, int line, int column) {
 	return mat->table[matrix_get_pos(mat, line, column)];
 }
 
-void matrix_set(SML_MATRIX *mat, int line, int column, int value) {
+void matrix_set(SML_MATRIX *mat, int line, int column, double value) {
 	mat->table[matrix_get_pos(mat, line, column)] = value;
 }
 
 void matrix_print(SML_MATRIX *mat) {
 	for (int i = 0; i < mat->lines; i++) {
 		for (int j = 0; j < mat->columns; j++)
-			printf("%d ", matrix_get(mat, i, j));
+			printf("%g ", matrix_get(mat, i, j));
 		printf("\n");
 	}
 }
 
-void matrix_fill(SML_MATRIX *mat, int *array) {
+void matrix_fill(SML_MATRIX *mat, double *array) {
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++) 
 			matrix_set(mat, i, j, array[matrix_get_pos(mat, i, j)]);
@@ -175,7 +175,7 @@ bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat_res) {
 	return true;
 }
 
-void matrix_mul_num(SML_MATRIX *mat, int num, SML_MATRIX *mat_res) {
+void matrix_mul_num(SML_MATRIX *mat, double num, SML_MATRIX *mat_res) {
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
 			matrix_set(mat_res, i, j, matrix_get(mat, i, j) * num);
@@ -215,7 +215,7 @@ bool matrix_get_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column
 	return true;
 }
 
-int matrix_minor(SML_MATRIX *mat, int line, int column) {
+double matrix_minor(SML_MATRIX *mat, int line, int column) {
 	SML_MATRIX tmp;
 
 	matrix_get_minor(mat, &tmp, line, column);
@@ -223,12 +223,12 @@ int matrix_minor(SML_MATRIX *mat, int line, int column) {
 	return matrix_det(&tmp);
 }
 
-int matrix_alg_complement(SML_MATRIX *mat, int line, int column) {
+double matrix_alg_complement(SML_MATRIX *mat, int line, int column) {
 	return matrix_minor(mat, line, column) * pow(-1, line + column);
 }
 
-int matrix_det(SML_MATRIX *mat) {
-	int det = 0;
+double matrix_det(SML_MATRIX *mat) {
+	double det = 0.;
 
 	if (matrix_get_order(mat) == -1)
 		return 0;
@@ -242,7 +242,7 @@ int matrix_det(SML_MATRIX *mat) {
 }
 
 bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
-	int det = matrix_det(mat);
+	double det = matrix_det(mat);
 
 	if (det == 0)
 		return false;
@@ -257,7 +257,7 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 int main() {
 	SML_MATRIX mat1;
 	matrix_init(&mat1, 4, 4);
-	matrix_fill(&mat1, (int []) {
+	matrix_fill(&mat1, (double []) {
 		1, 2, 0, -1,
 		3, 1, 4, 1,
 		-2, 3, 0, 1,
@@ -266,7 +266,7 @@ int main() {
 
 	// matrix_fill_rand(&mat1, 1, 5);
 
-	printf("test: det() = %d\n", matrix_det(&mat1));
+	printf("test: det() = %g\n", matrix_det(&mat1));
 
 	matrix_print(&mat1);
 
