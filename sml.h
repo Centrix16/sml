@@ -2,9 +2,9 @@
 #define __SIMPLE_MATRIX_LIBRARY_H_INCLUDED__
 
 typedef struct {
-	int *table;
-	double lines;
-	double columns;
+	double *table;
+	int lines;
+	int columns;
 } SML_MATRIX;
 
 SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns);
