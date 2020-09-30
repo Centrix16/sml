@@ -140,57 +140,57 @@ bool matrix_is_line(SML_MATRIX *mat) {
 		return false;
 }
 
-void matrix_transp(SML_MATRIX *mat1, SML_MATRIX *mat2) {
-		mat2->lines = mat1->columns;
-		mat2->columns = mat1->lines;
+void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+		mat_res->lines = mat->columns;
+		mat_res->columns = mat->lines;
 
-		for (int i = 0; i < mat1->lines; i++)
-			for (int j = 0; j < mat1->columns; j++)
-				matrix_set(mat2, i, j, matrix_get(mat1, j, i));
+		for (int i = 0; i < mat->lines; i++)
+			for (int j = 0; j < mat->columns; j++)
+				matrix_set(mat_res, i, j, matrix_get(mat, j, i));
 }
 
-bool matrix_add(SML_MATRIX *mat1, SML_MATRIX * mat2, SML_MATRIX *mat3) {
-	matrix_init(mat3, mat1->lines, mat1->columns);
+bool matrix_add(SML_MATRIX *mat1, SML_MATRIX * mat2, SML_MATRIX *mat_res) {
+	matrix_init(mat_res, mat1->lines, mat1->columns);
 
 	if (mat1->lines != mat2->lines || mat1->columns != mat2->columns)
 		return false;
 
 	for (int i = 0; i < mat1->lines; i++)
 		for (int j = 0; j < mat1->columns; j++)
-			matrix_set(mat3, i, j, matrix_get(mat1, i, j) + matrix_get(mat2, i, j));
+			matrix_set(mat_res, i, j, matrix_get(mat1, i, j) + matrix_get(mat2, i, j));
 
 	return true;
 }
 
-bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
-	matrix_init(mat3, mat1->lines, mat1->columns);
+bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat_res) {
+	matrix_init(mat_res, mat1->lines, mat1->columns);
 
 	if (mat1->lines != mat2->lines || mat1->columns != mat2->columns)
 		return false;
 
 	for (int i = 0; i < mat1->lines; i++)
 		for (int j = 0; j < mat1->columns; j++)
-			matrix_set(mat3, i, j, matrix_get(mat1, i, j) - matrix_get(mat2, i, j));
+			matrix_set(mat_res, i, j, matrix_get(mat1, i, j) - matrix_get(mat2, i, j));
 
 	return true;
 }
 
-void matrix_mul_num(SML_MATRIX *mat1, int num, SML_MATRIX *mat2) {
-	for (int i = 0; i < mat1->lines; i++)
-		for (int j = 0; j < mat1->columns; j++)
-			matrix_set(mat2, i, j, matrix_get(mat1, i, j) * num);
+void matrix_mul_num(SML_MATRIX *mat, int num, SML_MATRIX *mat_res) {
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			matrix_set(mat_res, i, j, matrix_get(mat, i, j) * num);
 }
 
-bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
-	matrix_init(mat3, mat1->lines, mat2->columns);
+bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat_res) {
+	matrix_init(mat_res, mat1->lines, mat2->columns);
 
 	if (mat1->columns != mat2->lines)
 		return false;
 
-	for (int i = 0; i < mat3->lines; i++)
-		for (int j = 0; j < mat3->columns; j++)
+	for (int i = 0; i < mat_res->lines; i++)
+		for (int j = 0; j < mat_res->columns; j++)
 			for (int k = 0; k < mat1->columns; k++)
-				matrix_set(mat3, i, j, matrix_get(mat3, i, j) + matrix_get(mat1, i, k) * matrix_get(mat2, k, j));
+				matrix_set(mat_res, i, j, matrix_get(mat_res, i, j) + matrix_get(mat1, i, k) * matrix_get(mat2, k, j));
 
 	return true;
 }
