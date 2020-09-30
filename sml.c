@@ -241,6 +241,21 @@ int matrix_det(SML_MATRIX *mat) {
 	return det;
 }
 
+bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+	int det = matrix_det(mat1);
+
+	if (det == 0)
+		return false;
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			matrix_set(mat_res, i, j, matrix_alg_complement(mat, i, j));
+
+	matrix_transp(mat_res, mat_res);
+
+	return true;
+}
+
 int main() {
 	SML_MATRIX mat1;
 	matrix_init(&mat1, 4, 4);
