@@ -12,14 +12,14 @@ SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns) {
 
 	mat->lines = lines;
 	mat->columns = columns;
-	mat->table = malloc(matrix_get_size(mat) * sizeof(int));
+	mat->table = malloc(matrix_get_size(mat) * sizeof(double));
 
 	if (mat->table == NULL)
 		return NULL;
 
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
-			matrix_set(mat, i, j, 0);
+			matrix_set(mat, i, j, 0.);
 
 	return mat;
 }
