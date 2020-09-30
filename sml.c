@@ -195,7 +195,7 @@ bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3) {
 	return true;
 }
 
-bool matrix_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column) {
+bool matrix_get_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column) {
 	if (mat->lines <= 1 || mat->columns <= 1 || !matrix_is_square(mat) || line < 0 || column < 0)
 			return false;
 
@@ -213,6 +213,14 @@ bool matrix_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column) {
 				matrix_set(mat_res, i - 1, j - 1, matrix_get(mat, i, j));
 
 	return true;
+}
+
+int matrix_minor(SML_MATRIX *mat, int line, int column) {
+	SML_MATRIX tmp;
+
+	matrix_get_minor(mat, &tmp, line, column);
+
+	return matrix_det(&tmp);
 }
 
 int matrix_det(SML_MATRIX *mat) {
