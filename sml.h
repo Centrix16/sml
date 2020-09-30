@@ -29,7 +29,8 @@ bool matrix_add(SML_MATRIX *mat1, SML_MATRIX * mat2, SML_MATRIX *mat3);
 bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3);
 void matrix_mul_num(SML_MATRIX *mat1, int num, SML_MATRIX *mat2);
 bool matrix_mul(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat3);
-bool matrix_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column);
+bool matrix_get_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column);
+int matrix_minor(SML_MATRIX *mat, int line, int column);
 int matrix_det(SML_MATRIX *mat);
 
 #endif
