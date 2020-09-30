@@ -228,21 +228,17 @@ int matrix_alg_complement(SML_MATRIX *mat, int line, int column) {
 }
 
 int matrix_det(SML_MATRIX *mat) {
-	int res = 0;
-	SML_MATRIX tmp;
+	int det = 0;
 
 	if (matrix_get_order(mat) == -1)
 		return 0;
 	else if (matrix_get_order(mat) == 1)
 		return matrix_get(mat, 0, 0);
 	else
-		for (int j = 0, i = 0; j < mat->columns; j++) {
-			matrix_minor(mat, &tmp, i, j);
-			res += matrix_get(mat, i, j) * pow(-1, i + j) * matrix_det(&tmp);
-			matrix_free(&tmp);
-		}
+		for (int j = 0, i = 0; j < mat->columns; j++)
+			det += matrix_get(mat, i, j) * matrix_alg_complement(mat, i, j);
 
-	return res;
+	return det;
 }
 
 int main() {
