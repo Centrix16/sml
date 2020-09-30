@@ -255,20 +255,21 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 }
 
 int main() {
-	SML_MATRIX mat1;
+	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
 	matrix_fill(&mat1, (double []) {
-		1, 2, 0, -1,
-		3, 1, 4, 1,
-		-2, 3, 0, 1,
-		-1, -3, 2, 1
+		1., 2., 0., -1.,
+		3., 1., 4., 1.,
+		-2., 3., 0., 1.,
+		-1., -3., 2., 1.
 	});
+	matrix_init(&mat2, 4, 4);
 
 	// matrix_fill_rand(&mat1, 1, 5);
 
-	printf("test: det() = %g\n", matrix_det(&mat1));
+	matrix_inverse(&mat1, &mat2);
 
-	matrix_print(&mat1);
+	matrix_print(&mat2);
 
 	matrix_free(&mat1);
 }
