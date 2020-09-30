@@ -235,16 +235,15 @@ int matrix_det(SML_MATRIX *mat) {
 
 int main() {
 	SML_MATRIX mat1;
-	matrix_init(&mat1, 5, 5);
-	/* matrix_fill(&mat1, (int []) {
-		1, 2, 3, 0, -1,
-		4, 5, 6, 45, -3,
-		7, 8, 10, 4, 1,
-		0, 0, 4, 8, 5,
-		11, 12, 13, 14, 15
-	}); */
+	matrix_init(&mat1, 4, 4);
+	matrix_fill(&mat1, (int []) {
+		1, 2, 0, -1,
+		3, 1, 4, 1,
+		-2, 3, 0, 1,
+		-1, -3, 2, 1
+	});
 
-	matrix_fill_rand(&mat1, 1, 5);
+	// matrix_fill_rand(&mat1, 1, 5);
 
 	printf("test: det() = %d\n", matrix_det(&mat1));
 
