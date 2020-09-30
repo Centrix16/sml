@@ -223,6 +223,10 @@ int matrix_minor(SML_MATRIX *mat, int line, int column) {
 	return matrix_det(&tmp);
 }
 
+int matrix_alg_complement(SML_MATRIX *mat, int line, int column) {
+	return matrix_minor(mat, line, column) * pow(-1, line + column);
+}
+
 int matrix_det(SML_MATRIX *mat) {
 	int res = 0;
 	SML_MATRIX tmp;
