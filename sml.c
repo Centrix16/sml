@@ -249,7 +249,7 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
-			matrix_set(mat_res, i, j, matrix_alg_complement(mat, j, i));
+			matrix_set(mat_res, i, j, matrix_alg_complement(mat, j, i) / det);
 
 	return true;
 }
