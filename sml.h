@@ -33,5 +33,6 @@ bool matrix_get_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column
 int matrix_minor(SML_MATRIX *mat, int line, int column);
 int matrix_alg_complement(SML_MATRIX *mat, int line, int column);
 int matrix_det(SML_MATRIX *mat);
+bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res);
 
 #endif
