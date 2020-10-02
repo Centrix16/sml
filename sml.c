@@ -277,4 +277,5 @@ int main() {
 	matrix_print(&mat2);
 
 	matrix_free(&mat1);
+	matrix_free(&mat2);
 }
