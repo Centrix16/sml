@@ -169,6 +169,12 @@ bool matrix_is_lower_triangular(SML_MATRIX *mat){
 	return true;
 }
 
+bool matrix_is_triangular(SML_MATRIX *mat) {
+	if (matrix_is_upper_triangular(mat) || matrix_is_lower_triangular(mat))
+		return true;
+
+	return false;
+}
 
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		mat_res->lines = mat->columns;
