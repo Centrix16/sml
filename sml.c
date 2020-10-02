@@ -194,7 +194,7 @@ bool matrix_is_upper_unitriangular(SML_MATRIX *mat){
 }
 
 bool matrix_is_lower_unitriangular(SML_MATRIX *mat){
-if (matrix_is_square(mat) == false)
+	if (matrix_is_square(mat) == false)
 		return false;
 
 	for (int i = 0; i < mat->lines; i++)
@@ -207,6 +207,13 @@ if (matrix_is_square(mat) == false)
 				return false;
 
 	return true;
+}
+
+bool matrix_is_unitriangular(SML_MATRIX *mat) {
+	if (matrix_is_upper_unitriangular(mat) || matrix_is_lower_unitriangular(mat))
+		return true;
+
+	return false;
 }
 
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
