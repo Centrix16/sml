@@ -29,6 +29,7 @@ bool matrix_is_lower_triangular(SML_MATRIX *mat);
 bool matrix_is_triangular(SML_MATRIX *mat);
 bool matrix_is_upper_unitriangular(SML_MATRIX *mat);
 bool matrix_is_lower_unitriangular(SML_MATRIX *mat);
+bool matrix_is_unitriangular(SML_MATRIX *mat);
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res);
 bool matrix_add(SML_MATRIX *mat1, SML_MATRIX * mat2, SML_MATRIX *mat_res);
 bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat_res);
