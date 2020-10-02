@@ -217,10 +217,15 @@ bool matrix_get_minor(SML_MATRIX *mat, SML_MATRIX *mat_res, int line, int column
 
 double matrix_minor(SML_MATRIX *mat, int line, int column) {
 	SML_MATRIX tmp;
+	double res = 0;
 
 	matrix_get_minor(mat, &tmp, line, column);
 
-	return matrix_det(&tmp);
+	res = matrix_det(&tmp);
+
+	matrix_free(&tmp);
+
+	return res;
 }
 
 double matrix_alg_complement(SML_MATRIX *mat, int line, int column) {
