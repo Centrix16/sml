@@ -161,9 +161,9 @@ bool matrix_is_lower_triangular(SML_MATRIX *mat){
 
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 1; j < mat->columns; j++)
-			if (j <= i) {
+			if (j <= i)
 				j = i;
-			} else if (matrix_get(mat, i, j))
+			else if (matrix_get(mat, i, j))
 				return false;
 
 	return true;
@@ -189,6 +189,22 @@ bool matrix_is_upper_unitriangular(SML_MATRIX *mat){
 					return false;
 				else if (matrix_get(mat, i, j))
 					return false;
+
+	return true;
+}
+
+bool matrix_is_lower_unitriangular(SML_MATRIX *mat){
+if (matrix_is_square(mat) == false)
+		return false;
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 1; j < mat->columns; j++)
+			if (j < i)
+				j = i;
+			else if (i == j && matrix_get(mat, i, j) != 1)
+				return false;
+			else if (matrix_get(mat, i, j))
+				return false;
 
 	return true;
 }
