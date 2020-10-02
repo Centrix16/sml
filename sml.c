@@ -140,6 +140,20 @@ bool matrix_is_line(SML_MATRIX *mat) {
 		return false;
 }
 
+bool matix_is_upper_triangular(SML_MATRIX *mat){
+	if (matrix_is_square(mat) == false)
+		return false;
+
+	for (int i = 1; i < mat->line; i++)
+		for (int j = 0; j < mat->column; j++)
+			if (j >= i)
+				continue;
+			else if (matrix_get(mat, i, j))
+				return false;
+
+	return true;
+}
+
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		mat_res->lines = mat->columns;
 		mat_res->columns = mat->lines;
@@ -258,6 +272,8 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 
 	return true;
 }
+
+
 
 int main() {
 	SML_MATRIX mat1, mat2;
