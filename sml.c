@@ -176,6 +176,23 @@ bool matrix_is_triangular(SML_MATRIX *mat) {
 	return false;
 }
 
+bool matrix_is_upper_unitriangular(SML_MATRIX *mat){
+	if (matrix_is_square(mat) == false)
+		return false;
+
+	for (int i = 1; i < mat->lines; i++)
+			for (int j = 0; j < mat->columns; j++)
+				if (j > i) {
+					i++;
+					j = 0;
+				} else if (i == j && matrix_get(mat, i, j) != 1)
+					return false;
+				else if (matrix_get(mat, i, j))
+					return false;
+
+	return true;
+}
+
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		mat_res->lines = mat->columns;
 		mat_res->columns = mat->lines;
