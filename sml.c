@@ -75,6 +75,14 @@ void matrix_fill_rand(SML_MATRIX *mat, int min, int max) {
 			matrix_set(mat, i, j, rand() % (max - min + 1) + min);
 }
 
+void matrix_copy(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+	matrix_init(mat_res, mat->lines, mat->columns);
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; i < mat->columns; j++)
+			matrix_set(mat_res, i, j, matrix_get(mat, i, j));
+}
+
 bool matrix_is_equal(SML_MATRIX *mat1, SML_MATRIX *mat2) {
 	if (mat1->lines != mat2->lines || mat1->columns != mat2->columns)
 		return false;
@@ -221,13 +229,14 @@ bool matrix_is_stepped(SML_MATRIX *mat) {
 
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
-			if (matrix_get(mat, i, j))
+			if (matrix_get(mat, i, j)) {
 				if (index >= j)
 					return false;
 				else {
 					index = j;
 					j = mat->columns;
 				}
+			}
 
 	return true;
 }
