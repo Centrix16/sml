@@ -378,6 +378,20 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	return true;
 }
 
+bool matirx_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow) {
+	SML_MATRIX *tmp;
+	if (!matrix_is_square(mat))
+		return false;
+
+	matrix_init_E(tmp, mat->lines, mat->lines);
+
+	for (int i = 0; i < pow; i++) {
+		matrix_mul(tmp, mat, mat_res);
+		matrix_copy(tmp, mat_res);
+	}
+
+	return true;
+}
 
 int main() {
 	SML_MATRIX mat1, mat2;
