@@ -24,6 +24,15 @@ SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns) {
 	return mat;
 }
 
+SML_MATRIX *matrix_init_E(SML_MATRIX *mat, int lines, int columns) {
+	matrix_init(mat, lines, columns);
+
+	for (int k = 0; k < mat->lines && k < mat->columns; k++)
+		matrix_set(mat, k, k, 1);
+
+	return mat;
+}
+
 void matrix_free(SML_MATRIX *mat) {
 	mat->lines = 0;
 	mat->columns = 0;
@@ -368,7 +377,6 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 
 	return true;
 }
-
 
 
 int main() {
