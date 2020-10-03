@@ -85,8 +85,6 @@ void matrix_fill_rand(SML_MATRIX *mat, int min, int max) {
 }
 
 void matrix_copy(SML_MATRIX *mat, SML_MATRIX *mat_res) {
-	matrix_init(mat_res, mat->lines, mat->columns);
-
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; i < mat->columns; j++)
 			matrix_set(mat_res, i, j, matrix_get(mat, i, j));
@@ -378,16 +376,16 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	return true;
 }
 
-bool matirx_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow) {
-	SML_MATRIX *tmp;
+bool matrix_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow) {
+	SML_MATRIX tmp;
 	if (!matrix_is_square(mat))
 		return false;
 
-	matrix_init_E(tmp, mat->lines, mat->lines);
+	matrix_init_E(&tmp, mat->lines, mat->lines);
 
 	for (int i = 0; i < pow; i++) {
-		matrix_mul(tmp, mat, mat_res);
-		matrix_copy(tmp, mat_res);
+		matrix_mul(&tmp, mat, mat_res);
+		matrix_copy(&tmp, mat_res);
 	}
 
 	return true;
