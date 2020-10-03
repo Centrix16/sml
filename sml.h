@@ -44,5 +44,6 @@ double matrix_minor(SML_MATRIX *mat, int line, int column);
 double matrix_alg_complement(SML_MATRIX *mat, int line, int column);
 double matrix_det(SML_MATRIX *mat);
 bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res);
+bool matirx_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow);
 
 #endif
