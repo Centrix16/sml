@@ -216,6 +216,22 @@ bool matrix_is_unitriangular(SML_MATRIX *mat) {
 	return false;
 }
 
+bool matrix_is_stepped(SML_MATRIX *mat) {
+	int index = -1;
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			if (matrix_get(mat, i, j))
+				if (index >= j)
+					return false;
+				else {
+					index = j;
+					j = mat->columns;
+				}
+
+	return true;
+}
+
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		mat_res->lines = mat->columns;
 		mat_res->columns = mat->lines;
