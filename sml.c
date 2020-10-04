@@ -373,7 +373,7 @@ double matrix_det(SML_MATRIX *mat) {
 bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	double det = matrix_det(mat);
 
-	if (!matrix_union(mat, mat_res))
+	if (!matrix_union(mat, mat_res) || !det)
 		return false;
 
 	for (int i = 0; i < mat->lines; i++)
@@ -399,7 +399,7 @@ bool matrix_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow) {
 }
 
 bool matrix_union(SML_MATRIX *mat, SML_MATRIX *mat_res) {
-	if (matrix_is_degenerate(mat) || !matrix_is_square(mat))
+	if (!matrix_is_square(mat))
 		return false;
 
 	for (int i = 0; i < mat->lines; i++)
