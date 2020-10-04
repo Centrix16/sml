@@ -373,12 +373,12 @@ double matrix_det(SML_MATRIX *mat) {
 bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	double det = matrix_det(mat);
 
-	if (det == 0)
+	if (!matrix_union(mat, mat_res))
 		return false;
 
 	for (int i = 0; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
-			matrix_set(mat_res, i, j, matrix_alg_complement(mat, j, i) / det);
+			matrix_set(mat_res, i, j, matrix_get(mat_res, i, j) / det);
 
 	return true;
 }
