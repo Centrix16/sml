@@ -398,6 +398,17 @@ bool matrix_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow) {
 	return true;
 }
 
+bool matrix_union(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+	if (matrix_is_degenerate(mat) || !matrix_is_square(mat))
+		return false;
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			matrix_set(mat_res, i, j, matrix_alg_complement(mat, j, i));
+
+	return true;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
