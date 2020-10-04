@@ -258,7 +258,7 @@ bool matrix_is_symmetric(SML_MATRIX *mat) {
 }
 
 bool matrix_is_degenerate(SML_MATRIX *mat) {
-	if (matrix_det(mat))
+	if (!matrix_is_square(mat) || matrix_det(mat))
 		return false;
 
 	return true;
@@ -267,6 +267,9 @@ bool matrix_is_degenerate(SML_MATRIX *mat) {
 bool matrix_is_permutation(SML_MATRIX *mat1, SML_MATRIX *mat2) {
 	SML_MATRIX tmp1, tmp2;
 	bool res = false;
+
+	if (!matrix_is_square(mat1) || !matrix_is_square(mat2))
+		return res;
 
 	matrix_mul(mat1, mat2, &tmp1);
 	matrix_mul(mat2, mat1, &tmp2);
