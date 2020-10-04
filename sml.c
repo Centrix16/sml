@@ -266,17 +266,18 @@ bool matrix_is_degenerate(SML_MATRIX *mat) {
 
 bool matrix_is_permutation(SML_MATRIX *mat1, SML_MATRIX *mat2) {
 	SML_MATRIX tmp1, tmp2;
+	bool res = false;
 
 	matrix_mul(mat1, mat2, &tmp1);
 	matrix_mul(mat2, mat1, &tmp2);
 
 	if (matrix_is_equal(&tmp1, &tmp2))
-		return true;
+		res = true;
 
 	matrix_free(&tmp1);
 	matrix_free(&tmp2);
 
-	return false;
+	return res;
 }
 
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
