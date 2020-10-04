@@ -257,6 +257,13 @@ bool matrix_is_symmetric(SML_MATRIX *mat) {
 	return true;
 }
 
+bool matrix_is_degenerate(SML_MATRIX *mat) {
+	if (matrix_det(mat))
+		return false;
+
+	return true;
+}
+
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		mat_res->lines = mat->columns;
 		mat_res->columns = mat->lines;
