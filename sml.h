@@ -58,5 +58,6 @@ void matrix_mul_column(SML_MATRIX *mat, int column, double k);
 void matrix_add_line(SML_MATRIX *mat, int line1, int line2, double k);
 void matrix_add_column(SML_MATRIX *mat, int column1, int column2, double k);
 bool matrix_crossing_line(SML_MATRIX *mat, int line);
+bool matrix_crossing_column(SML_MATRIX *mat, int column);
 
 #endif
