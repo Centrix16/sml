@@ -464,6 +464,11 @@ void matrix_mul_line(SML_MATRIX *mat, int line, double k) {
 		matrix_set(mat, line, j, matrix_get(mat, line, j) * k);
 }
 
+void matrix_mul_column(SML_MATRIX *mat, int column, double k) {
+	for (int i = 0; i < mat->lines; i++)
+		matrix_set(mat, i, column, matrix_get(mat, i, column) * k);
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
