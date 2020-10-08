@@ -24,6 +24,15 @@ SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns) {
 	return mat;
 }
 
+SML_MATRIX *matrix_init_mat(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+	if (!matrix_init(mat_res, mat->lines, mat->columns))
+		return NULL;
+
+	matrix_copy(mat, mat_res);
+
+	return mat_res;
+}
+
 SML_MATRIX *matrix_init_O(SML_MATRIX *mat, int lines, int columns) {
 	if (!matrix_init(mat, lines, columns))
 		return NULL;
