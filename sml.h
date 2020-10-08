@@ -8,6 +8,7 @@ typedef struct {
 } SML_MATRIX;
 
 SML_MATRIX *matrix_init(SML_MATRIX *mat, int lines, int columns);
+SML_MATRIX *matrix_init_mat(SML_MATRIX *mat, SML_MATRIX *mat_res);
 SML_MATRIX *matrix_init_O(SML_MATRIX *mat, int lines, int columns);
 SML_MATRIX *matrix_init_E(SML_MATRIX *mat, int lines, int columns);
 void matrix_free(SML_MATRIX *mat);
