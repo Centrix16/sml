@@ -474,6 +474,11 @@ void matrix_add_line(SML_MATRIX *mat, int line1, int line2, double k) {
 		matrix_set(mat, line1, j, matrix_get(mat, line1, j) + matrix_get(mat, line2, j) * k);
 }
 
+void matrix_add_column(SML_MATRIX *mat, int column1, int column2, double k) {
+	for (int i = 0; i < mat->lines; i++)
+		matrix_set(mat, i, column1, matrix_get(mat, i, column1) + matrix_get(mat, i, column2) * k);
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
