@@ -450,7 +450,7 @@ bool matrix_perm(SML_MATRIX *mat, int i1, int j1, int i2, int j2) {
 }
 
 void matrix_perm_lines(SML_MATRIX *mat, int line1, int line2) {
-	for (int j = 0; j < mat->lines; j++)
+	for (int j = 0; j < mat->columns; j++)
 		matrix_perm(mat, line1, j, line2, j);
 }
 
