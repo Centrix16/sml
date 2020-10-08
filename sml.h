@@ -52,5 +52,6 @@ bool matrix_union(SML_MATRIX *mat, SML_MATRIX *mat_res);
 bool matrix_perm(SML_MATRIX *mat, int i1, int j1, int i2, int j2);
 void matrix_perm_lines(SML_MATRIX *mat, int line1, int line2);
 void matrix_perm_columns(SML_MATRIX *mat, int column1, int column2);
+void matrix_mul_line(SML_MATRIX *mat, int line, double k);
 
 #endif
