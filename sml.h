@@ -50,5 +50,6 @@ bool matrix_inverse(SML_MATRIX *mat, SML_MATRIX *mat_res);
 bool matrix_pow(SML_MATRIX *mat, SML_MATRIX *mat_res, int pow);
 bool matrix_union(SML_MATRIX *mat, SML_MATRIX *mat_res);
 bool matrix_perm(SML_MATRIX *mat, int i1, int j1, int i2, int j2);
+void matrix_perm_lines(SML_MATRIX *mat, int line1, int line2);
 
 #endif
