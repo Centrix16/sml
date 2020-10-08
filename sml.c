@@ -454,6 +454,11 @@ void matrix_perm_lines(SML_MATRIX *mat, int line1, int line2) {
 		matrix_perm(mat, line1, j, line2, j);
 }
 
+void matrix_perm_columns(SML_MATRIX *mat, int column1, int column2) {
+	for (int i = 0; i < mat->lines; i++)
+		matrix_perm(mat, i, column1, i, column2);
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
