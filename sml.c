@@ -436,6 +436,19 @@ bool matrix_union(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	return true;
 }
 
+bool matrix_perm(SML_MATRIX *mat, int i1, int j1, int i2, int j2) {
+	double tmp = matrix_get(mat, i1, j1);
+
+	if (i1 >= mat->lines || i2 >= mat->lines || i1 < 0 || i2 < 0 ||
+			j1 >= mat->columns || j2 >= mat->columns || j1 < 0 || j2 < 0)
+		return false;
+
+	matrix_set(mat, i1, j1, matrix_get(mat, i2, j2));
+	matrix_set(mat, i2, j2, tmp);
+
+	return true;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
