@@ -495,6 +495,27 @@ void matrix_add_column(SML_MATRIX *mat, int column1, int column2, double k) {
 		matrix_set(mat, i, column1, matrix_get(mat, i, column1) + matrix_get(mat, i, column2) * k);
 }
 
+bool matrix_crossing_line(SML_MATRIX *mat, int line) {
+	if (line > mat->lines || line <= 0 || mat->lines <= 0)
+		return false;
+
+	SML_MATRIX tmp;
+	matrix_init_mat(mat, &tmp);
+
+	mat->table = realloc(mat->table, matrix_get_size(&tmp));
+
+	if (!mat->table)
+		return false;
+
+	for (int i = line; i < mat->lines; i++)
+		for (int j = 0; j < mat->columns; j++)
+			matrix_set(mat, i, j, matrix_get(&tmp, i + 1, j));
+
+	matrix_free(&tmp);
+
+	return true;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 4, 4);
