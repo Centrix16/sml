@@ -496,7 +496,7 @@ void matrix_add_column(SML_MATRIX *mat, int column1, int column2, double k) {
 }
 
 bool matrix_crossing_line(SML_MATRIX *mat, int line) {
-	if (line > mat->lines || line <= 0 || mat->lines <= 0)
+	if (line > mat->lines || line <= 0)
 		return false;
 
 	SML_MATRIX tmp;
@@ -510,6 +510,27 @@ bool matrix_crossing_line(SML_MATRIX *mat, int line) {
 	for (int i = line; i < mat->lines; i++)
 		for (int j = 0; j < mat->columns; j++)
 			matrix_set(mat, i, j, matrix_get(&tmp, i + 1, j));
+
+	matrix_free(&tmp);
+
+	return true;
+}
+
+bool matrix_crossing_column(SML_MATRIX *mat, int column) {
+	if (column > mat->columns || column<= 0)
+		return false;
+
+	SML_MATRIX tmp;
+	matrix_init_mat(mat, &tmp);
+
+	mat->table = realloc(mat->table, matrix_get_size(&tmp));
+
+	if (!mat->table)
+		return false;
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = column; j < mat->columns; j++)
+			matrix_set(mat, i, j, matrix_get(&tmp, i, j + 1));
 
 	matrix_free(&tmp);
 
