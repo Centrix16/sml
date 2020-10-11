@@ -539,20 +539,44 @@ bool matrix_crossing_column(SML_MATRIX *mat, int column) {
 
 int main() {
 	SML_MATRIX mat1, mat2;
-	matrix_init(&mat1, 4, 4);
+	matrix_init(&mat1, 3, 4);
 	matrix_fill(&mat1, (double []) {
-		1., 2., 0., -1.,
-		3., 1., 4., 1.,
-		-2., 3., 0., 1.,
-		-1., -3., 2., 1.
+		2, 3, 1, 2,
+		0, 2,-1, 1,
+		4, 0, 5, 1
 	});
-	matrix_init(&mat2, 4, 4);
+	matrix_init(&mat2, 3, 4);
 
 	// matrix_fill_rand(&mat1, 1, 5);
 
-	matrix_inverse(&mat1, &mat2);
+	matrix_print(&mat1); printf("\n");
 
-	matrix_print(&mat2);
+	matrix_mul_line(&mat1, 0, 1. / 2);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_line(&mat1, 2, 0, -4);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_column(&mat1, 1, 0, -1.5);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_column(&mat1, 2, 0, -0.5);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_column(&mat1, 3, 0, -1);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_mul_line(&mat1, 1, 1. / 2);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_line(&mat1, 2, 1, 6);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_column(&mat1, 2, 1, 0.5);
+	matrix_print(&mat1); printf("\n");
+
+	matrix_add_column(&mat1, 3, 1, -0.5);
+	matrix_print(&mat1); printf("\n");
 
 	matrix_free(&mat1);
 	matrix_free(&mat2);
