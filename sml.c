@@ -108,7 +108,7 @@ bool matrix_copy(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		return false;
 
 	for (int i = 0; i < mat_res->lines; i++)
-		for (int j = 0; i < mat_res->columns; j++)
+		for (int j = 0; j < mat_res->columns; j++)
 			matrix_set(mat_res, i, j, matrix_get(mat, i, j));
 
 	return true;
@@ -564,38 +564,11 @@ int main() {
 		0, 2,-1, 1,
 		4, 0, 5, 1
 	});
-	matrix_init(&mat2, 3, 4);
 
 	// matrix_fill_rand(&mat1, 1, 5);
 
-	matrix_print(&mat1); printf("\n");
-
-	matrix_mul_line(&mat1, 0, 1. / 2);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_line(&mat1, 2, 0, -4);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_column(&mat1, 1, 0, -1.5);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_column(&mat1, 2, 0, -0.5);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_column(&mat1, 3, 0, -1);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_mul_line(&mat1, 1, 1. / 2);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_line(&mat1, 2, 1, 6);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_column(&mat1, 2, 1, 0.5);
-	matrix_print(&mat1); printf("\n");
-
-	matrix_add_column(&mat1, 3, 1, -0.5);
-	matrix_print(&mat1); printf("\n");
+	matrix_canonical(&mat1, &mat2);
+	matrix_print(&mat2);
 
 	matrix_free(&mat1);
 	matrix_free(&mat2);
