@@ -537,6 +537,25 @@ bool matrix_crossing_column(SML_MATRIX *mat, int column) {
 	return true;
 }
 
+void matrix_canonical(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+	matrix_init_mat(mat, mat_res);
+
+	for (int row = 0; row < mat->lines || row < mat->columns;) {
+		if (row < mat->lines && row < mat->columns)
+			matrix_mul_line(mat_res, row, 1. / matrix_get(mat_res, row, row));
+
+		row++;
+
+		for (int i = row; i < mat->lines; i++)
+			matrix_add_line(mat_res, row + i, row - 1,
+			(-1) * matrix_get(mat_res, row + i, row - 1) / matrix_get(mat_res, row - 1, row - 1));
+
+		for (int j = row; j < mat->columns; j++)
+			matrix_add_column(mat_res, row - 1, row + j,
+			(-1) * matrix_get(mat_res, row - 1, row + j) / matrix_get(mat_res, row - 1, row - 1));
+	}
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 3, 4);
