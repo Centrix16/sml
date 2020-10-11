@@ -83,8 +83,11 @@ void matrix_print(SML_MATRIX *mat) {
 	for (int i = 0; i < mat->lines; i++) {
 		for (int j = 0; j < mat->columns; j++)
 			printf("%g ", matrix_get(mat, i, j));
+
 		printf("\n");
 	}
+
+	printf("\n");
 }
 
 void matrix_fill(SML_MATRIX *mat, double *array) {
@@ -102,8 +105,7 @@ void matrix_fill_rand(SML_MATRIX *mat, int min, int max) {
 }
 
 bool matrix_copy(SML_MATRIX *mat, SML_MATRIX *mat_res) {
-	if (mat_res->lines <= 0 || mat_res->columns <= 0 ||
-			mat_res->columns != mat->columns ||
+	if (mat_res->columns != mat->columns ||
 			mat_res->lines != mat->lines)
 		return false;
 
