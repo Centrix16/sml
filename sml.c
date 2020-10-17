@@ -313,13 +313,16 @@ bool matrix_is_canonical(SML_MATRIX *mat) {
 	bool diagonal_is_zero = false;
 
 	for (int i = 0; i < mat->lines; i++)
-		for (int j = 0; i < mat->columns; j++)
-			if (i == j && matrix_get(mat, i, j) == 0)
-				if (!diagonal_is_zero)
-					diagonal_is_zero = true;
-				else
-					return false;
-			else if (matrix_get(mat, i, j) != 0)
+		for (int j = 0; j < mat->columns; j++)
+			if (i == j) {
+				if (matrix_get(mat, i, j) == 0) {
+					if (diagonal_is_zero)
+						return false;
+					else
+						diagonal_is_zero = true;
+				}
+			} else 
+				if (matrix_get(mat, i, j) != 0)
 					return false;
 
 	return true;
@@ -580,13 +583,14 @@ int main() {
 	matrix_fill(&mat1, (double []) {
 		2, 3, 1, 2,
 		0, 2,-1, 1,
-		4, 0, 5, 1
+		1, 0, 5, 1
 	});
 
 	// matrix_fill_rand(&mat1, 1, 5);
 
 	matrix_canonical(&mat1, &mat2);
 	matrix_print(&mat2);
+	printf("\n%d\n", matrix_is_canonical(&mat2));
 
 	matrix_free(&mat1);
 	matrix_free(&mat2);
