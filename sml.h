@@ -38,6 +38,7 @@ bool matrix_is_stepped(SML_MATRIX *mat);
 bool matrix_is_symmetric(SML_MATRIX *mat);
 bool matrix_is_degenerate(SML_MATRIX *mat);
 bool matrix_is_permutation(SML_MATRIX *mat1, SML_MATRIX *mat2);
+bool matrix_is_canonical(SML_MATRIX *mat);
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res);
 bool matrix_add(SML_MATRIX *mat1, SML_MATRIX * mat2, SML_MATRIX *mat_res);
 bool matrix_diff(SML_MATRIX *mat1, SML_MATRIX *mat2, SML_MATRIX *mat_res);
