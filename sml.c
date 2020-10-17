@@ -588,6 +588,18 @@ void matrix_stepped(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	}
 }
 
+double matrix_trace(SML_MATRIX *mat) {
+	double res = 0.;
+
+	if (!matrix_is_square(mat))
+		return res;
+
+	for (int i = 0; i < mat->lines; i++)
+		res += matrix_get(mat, i, i);
+
+	return res;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 3, 4);
