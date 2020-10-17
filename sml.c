@@ -577,6 +577,17 @@ void matrix_canonical(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 	}
 }
 
+void matrix_stepped(SML_MATRIX *mat, SML_MATRIX *mat_res) {
+	matrix_init_mat(mat, mat_res);
+
+	for (int row = 0; row < mat->lines || row < mat->columns;) {
+		for (int i = ++row; i < mat->lines; i++)
+			if (matrix_get(mat_res, i, row - 1))
+				matrix_add_line(mat_res, i, row - 1,
+				(-1) * matrix_get(mat_res, i, row - 1) / matrix_get(mat_res, row - 1, row - 1));
+	}
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 3, 4);
@@ -588,9 +599,8 @@ int main() {
 
 	// matrix_fill_rand(&mat1, 1, 5);
 
-	matrix_canonical(&mat1, &mat2);
+	matrix_stepped(&mat1, &mat2);
 	matrix_print(&mat2);
-	printf("\n%d\n", matrix_is_canonical(&mat2));
 
 	matrix_free(&mat1);
 	matrix_free(&mat2);
