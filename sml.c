@@ -309,6 +309,22 @@ bool matrix_is_permutation(SML_MATRIX *mat1, SML_MATRIX *mat2) {
 	return res;
 }
 
+bool matrix_is_canonical(SML_MATRIX *mat) {
+	bool diagonal_is_zero = false;
+
+	for (int i = 0; i < mat->lines; i++)
+		for (int j = 0; i < mat->columns; j++)
+			if (i == j && matrix_get(mat, i, j) == 0)
+				if (!diagonal_is_zero)
+					diagonal_is_zero = true;
+				else
+					return false;
+			else if (matrix_get(mat, i, j) != 0)
+					return false;
+
+	return true;
+}
+
 void matrix_transp(SML_MATRIX *mat, SML_MATRIX *mat_res) {
 		mat_res->lines = mat->columns;
 		mat_res->columns = mat->lines;
