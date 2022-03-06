@@ -63,5 +63,6 @@ bool matrix_crossing_column(SML_MATRIX *mat, int column);
 void matrix_canonical(SML_MATRIX *mat, SML_MATRIX *mat_res);
 void matrix_stepped(SML_MATRIX *mat, SML_MATRIX *mat_res);
 double matrix_trace(SML_MATRIX *mat);
+int matrix_rank(SML_MATRIX *mat);
 
 #endif
