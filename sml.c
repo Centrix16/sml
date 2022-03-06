@@ -600,6 +600,24 @@ double matrix_trace(SML_MATRIX *mat) {
 	return res;
 }
 
+int matrix_rank(SML_MATRIX *mat) {
+    SML_MATRIX *temp = NULL;
+    int rank = (mat->lines < mat->columns)? mat->lines: mat->columns;
+
+    matrix_stepped(mat, temp);
+    
+    for (int i = temp->lines; i >= 0; i--) {
+        for (int j = 0; j < temp->columns; j++)
+            if (matrix_get(temp, i, j))
+                goto exit;
+        rank--;
+    }
+
+    exit:
+        matrix_free(temp);
+        return rank;
+}
+
 int main() {
 	SML_MATRIX mat1, mat2;
 	matrix_init(&mat1, 3, 4);
