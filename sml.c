@@ -51,8 +51,6 @@ SML_MATRIX *matrix_init_E(SML_MATRIX *mat, int lines, int columns) {
 }
 
 void matrix_free(SML_MATRIX *mat) {
-	mat->lines = 0;
-	mat->columns = 0;
 	free(mat->table);
 }
 
